@@ -1,12 +1,27 @@
 package com.example.employeepayrollapplication.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Component
+@Entity
+@Table(name="employee_payroll1.0")
 public class Employee {
     String name;
     int age;
     double salary;
+    @Id
+    int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getAge() {
         return age;
