@@ -21,8 +21,8 @@ public class EmployeeService {
                     .orElseThrow(() -> new RuntimeException("Employee not found"));
         }
 
-        public Employee addEmployee(Employee employee) {
-            return repository.save(employee);
+        public void addEmployee(Employee employee) {
+            repository.save(employee);
         }
 
         public Employee updateEmployee(int id, Employee employee) {
