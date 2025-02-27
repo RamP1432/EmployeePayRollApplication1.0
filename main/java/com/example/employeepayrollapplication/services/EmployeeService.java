@@ -1,5 +1,6 @@
 package com.example.employeepayrollapplication.services;
 
+import com.example.employeepayrollapplication.dto.EmployeeDTO;
 import com.example.employeepayrollapplication.model.Employee;
 import com.example.employeepayrollapplication.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,32 +11,31 @@ import java.util.*;
 @Service
 public class EmployeeService {
         @Autowired
-        private EmployeeRepository repository;
+        private EmployeeRepository employeeRepository;
 
         public List<Employee> getAllEmployees() {
-            return repository.findAll();
+            return employeeRepository.findAll();
         }
 
-        public Employee getEmployeeById(int id) {
-            return repository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Employee not found"));
+        public Optional<Employee> getEmployeeById(int id) {
+            return employeeRepository.findById(id);
         }
 
-        public void addEmployee(Employee employee) {
-            repository.save(employee);
+        public Employee addEmployee(Employee employee) {
+            return employeeRepository.save(employee);
         }
 
         public Employee updateEmployee(int id, Employee employee) {
-            Employee employee1 = repository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Employee not found"));
+            Employee employee1 = employeeRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Employee not found with ID: " + id));
+            employee1.setSalary(employee.getId());
+            employee1.setAge(employee.getAge());
             employee1.setName(employee.getName());
-            employee1.setSalary(employee.getSalary());
-            employee1.setSalary(employee.getSalary());
-            return repository.save(employee);
+            return employeeRepository.save(employee1);
         }
 
         public void deleteEmployee(int id) {
-            repository.deleteById(id);
+            employeeRepository.deleteById(id);
         }
-
 }
+

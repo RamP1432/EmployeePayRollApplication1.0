@@ -1,29 +1,19 @@
 package com.example.employeepayrollapplication.dto;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeDTO {
-        private String name;
-        private double salary;
 
-        public EmployeeDTO() {}
+    @NotEmpty(message = "Name cannot be empty")
+    public String name;
 
-        public EmployeeDTO(String name, double salary) {
-            this.name = name;
-            this.salary = salary;
-        }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
+    @Min(value = 1000, message = "Salary must be at least 1000")
+    public double salary;
+    public int age;
+    public int id;
 }

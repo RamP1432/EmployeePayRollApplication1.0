@@ -1,7 +1,9 @@
 package com.example.employeepayrollapplication.controllers;
 
+import com.example.employeepayrollapplication.dto.EmployeeDTO;
 import com.example.employeepayrollapplication.model.Employee;
 import com.example.employeepayrollapplication.services.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,14 +21,14 @@ public class EmployeePayRollController {
     }
 
     @GetMapping("/id/{myId}")
-    public Employee findById(@PathVariable int myId){
+    public Optional<Employee> findById(@PathVariable int myId){
         return employeeService.getEmployeeById(myId);
     }
 
     @PostMapping("/create")
-    public String createEmployee(@RequestBody Employee employee){
-        employeeService.addEmployee(employee);
-        return "Employee is added.";
+    public Employee createEmployee(@RequestBody Employee employee){
+        return employeeService.addEmployee(employee);
+
     }
 
     @PutMapping("/update/{myId}")
