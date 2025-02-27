@@ -1,6 +1,7 @@
 package com.example.employeepayrollapplication.controllers;
 
 import com.example.employeepayrollapplication.model.Employee;
+import com.example.employeepayrollapplication.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +11,7 @@ import java.util.*;
 @RequestMapping("/EmployeePayRoll")
 public class EmployeePayRollController {
     @Autowired
-    Employee employee;
+    EmployeeService employeeService;
     Map<Integer,Employee> employeeList=new HashMap<>();
     @GetMapping("/getData")
     public List<Employee> getData(){
